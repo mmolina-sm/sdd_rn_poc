@@ -122,3 +122,10 @@ bd close <id>         # Complete work
 - NEVER say "ready to push when you are" - YOU must push
 - If push fails, resolve and retry until it succeeds
 <!-- END BEADS INTEGRATION -->
+
+## Active Technologies
+- TypeScript 5.9 (strict mode) + Expo 54, React Native 0.81.5, React 19.1, Expo Router 6, expo-secure-store (new) (001-login-access-control)
+- expo-secure-store (session token + user data on device) (001-login-access-control)
+
+## Recent Changes
+- 001-login-access-control: Added TypeScript 5.9 (strict mode) + Expo 54, React Native 0.81.5, React 19.1, Expo Router 6, expo-secure-store (new)
