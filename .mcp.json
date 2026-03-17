@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "vibe-kanban": {
+      "command": "npx",
+      "args": ["vibe-kanban", "mcp"]
+    }
+  }
+}

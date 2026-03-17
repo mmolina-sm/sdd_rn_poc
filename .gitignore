@@ -45,3 +45,8 @@ app-example
 # Dolt database files (added by bd init)
 .dolt/
 *.db
+
+# Beads
+.beads/dolt/
+.beads/.beads-credential-key
+.beads/hooks/
