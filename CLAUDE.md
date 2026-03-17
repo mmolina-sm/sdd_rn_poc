@@ -13,8 +13,8 @@ Spec-Driven Development implementation on AI-DLC (AI Development Life Cycle)
 
 **SpecKit** (`/speckit.*`) — Primary tool for Phases 1-3: specification, planning, task generation
 **cc-sdd** (`/kiro:*`) — Supplementary commands for steering, validation, and gap analysis
-**Beads** (`bd`) — Phase 4 issue tracking and execution
-**VibeKanban** — Visual board and parallel agent orchestration
+**Beads** (`bd`) — Dependency-aware issue tracking (planning layer)
+**VibeKanban** — Execution layer: Kanban board, worktree-based parallel agent orchestration
 
 ### Active Specifications
 - Check `.specify/` for active SpecKit features
@@ -38,22 +38,33 @@ Spec-Driven Development implementation on AI-DLC (AI Development Life Cycle)
 /speckit.tasks {feature}                # Generate implementation tasks
 ```
 
-### Bridge — Tasks to Issues
+### Bridge — Tasks to VibeKanban
 ```
-/speckit.taskstoissues {feature}        # Convert tasks.md → Beads issues
+Push tasks from tasks.md → VibeKanban   # Via MCP create_task tool
 ```
+Each task from tasks.md becomes a VibeKanban card. VibeKanban is the execution
+layer — it manages worktrees, agent sessions, and task status.
+The MCP server is registered in `.mcp.json` for in-conversation access.
 
-### Phase 4 — Execution
-```
-bd ready                                # Find unblocked tasks
-/speckit.implement {feature}            # Implement tasks
-bd close <id>                           # Mark task done
-```
-
-### Visual Board
+### Phase 4 — Execution (VibeKanban)
 ```
 npx vibe-kanban                         # Launch Kanban board
 ```
+VibeKanban provides:
+- Visual Kanban board for task orchestration
+- Worktree-based parallel agent execution (isolated branches per task)
+- Agent session management (start, monitor, message)
+- MCP tools: create_task, update_task, list_tasks, start_workspace_session
+
+### Dependency Tracking (Beads — optional complement)
+```
+bd create ... --deps <id>               # Track dependencies between tasks
+bd ready                                # See unblocked tasks by dependency
+bd graph --all                          # Visualize dependency tree
+bd close <id>                           # Mark done → unblocks dependents
+```
+Beads tracks dependencies and execution order. Use alongside VibeKanban when
+dependency-aware scheduling matters.
 
 ### Validation & Quality (optional, any phase)
 - `/speckit.analyze` — cross-artifact consistency analysis
@@ -124,8 +135,5 @@ bd close <id>         # Complete work
 <!-- END BEADS INTEGRATION -->
 
 ## Active Technologies
-- TypeScript 5.9 (strict mode) + Expo 54, React Native 0.81.5, React 19.1, Expo Router 6, expo-secure-store (new) (001-login-access-control)
-- expo-secure-store (session token + user data on device) (001-login-access-control)
+<!-- Updated by .specify/scripts/bash/update-agent-context.sh -->
 
-## Recent Changes
-- 001-login-access-control: Added TypeScript 5.9 (strict mode) + Expo 54, React Native 0.81.5, React 19.1, Expo Router 6, expo-secure-store (new)
