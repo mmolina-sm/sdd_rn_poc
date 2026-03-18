@@ -24,7 +24,6 @@
 - **SpecKit**: v0.3.0 — project scaffold, specification workflow
 - **cc-sdd (Kiro commands)**: requirements, design, tasks, implementation
 - **Beads (bd)**: v0.61.0 — structured issue tracking with Dolt backend
-- **VibeKanban**: v0.1.31 — visual Kanban board, parallel agent orchestration
 - **Dolt**: SQL database backend for Beads
 
 ## Conventions

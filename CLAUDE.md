@@ -13,8 +13,7 @@ Spec-Driven Development implementation on AI-DLC (AI Development Life Cycle)
 
 **SpecKit** (`/speckit.*`) — Primary tool for Phases 1-3: specification, planning, task generation
 **cc-sdd** (`/kiro:*`) — Supplementary commands for steering, validation, and gap analysis
-**Beads** (`bd`) — Dependency-aware issue tracking (planning layer)
-**VibeKanban** — Execution layer: Kanban board, worktree-based parallel agent orchestration
+**Beads** (`bd`) — Dependency-aware issue tracking + execution orchestration
 
 ### Active Specifications
 - Check `.specify/` for active SpecKit features
@@ -38,33 +37,15 @@ Spec-Driven Development implementation on AI-DLC (AI Development Life Cycle)
 /speckit.tasks {feature}                # Generate implementation tasks
 ```
 
-### Bridge — Tasks to VibeKanban
+### Phase 4 — Execution (Beads + Agent)
 ```
-Push tasks from tasks.md → VibeKanban   # Via MCP create_task tool
+bd create ... --deps <id>               # Push tasks to Beads with dependencies
+bd ready                                # Agent finds unblocked work
+bd update <id> --claim                  # Agent claims a task
+bd close <id>                           # Agent marks done → unblocks dependents
 ```
-Each task from tasks.md becomes a VibeKanban card. VibeKanban is the execution
-layer — it manages worktrees, agent sessions, and task status.
-The MCP server is registered in `.mcp.json` for in-conversation access.
-
-### Phase 4 — Execution (VibeKanban)
-```
-npx vibe-kanban                         # Launch Kanban board
-```
-VibeKanban provides:
-- Visual Kanban board for task orchestration
-- Worktree-based parallel agent execution (isolated branches per task)
-- Agent session management (start, monitor, message)
-- MCP tools: create_task, update_task, list_tasks, start_workspace_session
-
-### Dependency Tracking (Beads — optional complement)
-```
-bd create ... --deps <id>               # Track dependencies between tasks
-bd ready                                # See unblocked tasks by dependency
-bd graph --all                          # Visualize dependency tree
-bd close <id>                           # Mark done → unblocks dependents
-```
-Beads tracks dependencies and execution order. Use alongside VibeKanban when
-dependency-aware scheduling matters.
+Beads is the execution layer — it tracks task state, dependency order, and
+agent work queues. An agent loops on `bd ready` until all tasks are complete.
 
 ### Validation & Quality (optional, any phase)
 - `/speckit.analyze` — cross-artifact consistency analysis
@@ -136,4 +117,3 @@ bd close <id>         # Complete work
 
 ## Active Technologies
 <!-- Updated by .specify/scripts/bash/update-agent-context.sh -->
-

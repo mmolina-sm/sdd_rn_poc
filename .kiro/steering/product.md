@@ -5,7 +5,7 @@ Proof-of-concept for validating the AI Development Life Cycle (AI-DLC) pipeline 
 
 ## Goals
 - Validate the end-to-end SDD workflow: Requirements → Design → Tasks → Implementation
-- Demonstrate the integration of SpecKit + Beads + VibeKanban as a cohesive AI-DLC toolchain
+- Demonstrate the integration of SpecKit + Beads as a cohesive AI-DLC toolchain
 - Prove that structured specification can drive high-quality, traceable mobile app development
 
 ## Non-Goals
@@ -16,7 +16,7 @@ Proof-of-concept for validating the AI Development Life Cycle (AI-DLC) pipeline 
 ## Success Criteria
 - Full pipeline execution from spec to working feature
 - Traceability from requirements through design to implementation tasks
-- Parallel agent execution via VibeKanban worktrees
+- Agent-driven execution via Beads task queue
 - Clean handoffs between SDD phases
 
 ## Target Users
